@@ -1,0 +1,28 @@
+CREATE DATABASE IF NOT EXISTS JobPortal;
+
+USE JobPortal;
+
+CREATE TABLE IF NOT EXISTS Users (
+    userId VARCHAR(36) PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL
+    location VARCHAR(300) NOT NULL;
+);
+
+CREATE TABLE IF NOT EXISTS Jobs (
+    jobId VARCHAR(36) PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    location VARCHAR(255) NOT NULL,
+    company VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS Applications (
+    applicationId VARCHAR(36) PRIMARY KEY,
+    userId VARCHAR(36),
+    jobId VARCHAR(36),
+    status VARCHAR(255) NOT NULL,
+    FOREIGN KEY (userId) REFERENCES Users(userId),
+    FOREIGN KEY (jobId) REFERENCES Jobs(jobId)
+);
